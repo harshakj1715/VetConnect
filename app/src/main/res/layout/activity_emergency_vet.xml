@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="🚨 Emergency Vet"
+            android:textStyle="bold"
+            android:textSize="28sp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="25dp"/>
+
+        <Button
+            android:id="@+id/btnCurrentLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📍 Get Current Location"/>
+
+        <Button
+            android:id="@+id/btnNearbyVets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="🏥 Find Nearby Veterinary Hospitals"
+            android:layout_marginTop="15dp"/>
+
+        <Button
+            android:id="@+id/btnEmergencyCall"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📞 Emergency Call"
+            android:layout_marginTop="15dp"/>
+
+        <Button
+            android:id="@+id/btnShareLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="📤 Share My Location"
+            android:layout_marginTop="15dp"/>
+
+        <TextView
+            android:id="@+id/tvLocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Current Location: Not Available"
+            android:textSize="18sp"
+            android:padding="20dp"/>
+
+    </LinearLayout>
+
+</ScrollView>
