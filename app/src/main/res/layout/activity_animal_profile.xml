@@ -12,21 +12,26 @@
         android:orientation="vertical"
         android:padding="20dp">
 
+        <!-- PAGE TITLE -->
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="🐄 Animal Profile"
+            android:text="🐾 Animal Profile"
             android:textSize="30sp"
             android:textStyle="bold"
             android:textColor="#2E7D32"
             android:layout_gravity="center"
-            android:layout_marginBottom="25dp"/>
+            android:layout_marginBottom="20dp" />
+
+        <!-- ANIMAL PROFILE CARD -->
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="18dp"
-            app:cardElevation="6dp">
+            app:cardElevation="5dp"
+            app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -34,88 +39,102 @@
                 android:orientation="vertical"
                 android:padding="20dp">
 
+                <!-- Animal Name -->
+
                 <TextView
                     android:id="@+id/txtAnimalName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Lakshmi"
-                    android:textSize="24sp"
+                    android:text="Rocky"
+                    android:textSize="25sp"
                     android:textStyle="bold"
-                    android:textColor="#2E7D32"/>
+                    android:textColor="#2E7D32" />
+
+                <!-- Type -->
 
                 <TextView
                     android:id="@+id/txtAnimalType"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Type : Cow"
-                    android:textSize="18sp"
-                    android:layout_marginTop="10dp"/>
+                    android:text="Type : Dog"
+                    android:textSize="17sp"
+                    android:textColor="#444444"
+                    android:layout_marginTop="12dp" />
+
+                <!-- Breed -->
 
                 <TextView
                     android:id="@+id/txtBreed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Breed : Jersey"
-                    android:textSize="18sp"/>
+                    android:text="Breed : German Shepherd"
+                    android:textSize="17sp"
+                    android:textColor="#444444"
+                    android:layout_marginTop="7dp" />
+
+                <!-- Age -->
 
                 <TextView
                     android:id="@+id/txtAge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Age : 5 Years"
-                    android:textSize="18sp"/>
+                    android:text="Age : 3 Years"
+                    android:textSize="17sp"
+                    android:textColor="#444444"
+                    android:layout_marginTop="7dp" />
+
+                <!-- Gender -->
 
                 <TextView
                     android:id="@+id/txtGender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Gender : Female"
-                    android:textSize="18sp"/>
+                    android:text="Gender : Male"
+                    android:textSize="17sp"
+                    android:textColor="#444444"
+                    android:layout_marginTop="7dp" />
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-        <Button
-            android:id="@+id/btnHealthRecords"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="📖 View Health Records"
-            android:textAllCaps="false"
+
+        <!-- HEALTH RECORDS TITLE -->
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="📖 Health Records"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textSize="18sp"
-            android:layout_marginTop="25dp"/>
+            android:textColor="#2E7D32"
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="10dp" />
 
 
-        <LinearLayout
+        <!-- NO RECORDS MESSAGE -->
+
+        <TextView
+            android:id="@+id/tvNoRecords"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:text="No health records available"
+            android:textSize="16sp"
+            android:textColor="#777777"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:padding="25dp"
+            android:visibility="gone" />
 
-            <Button
-                android:id="@+id/btnEditAnimal"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginEnd="8dp"
-                android:text="✏ Edit"
-                android:textAllCaps="false"
-                android:textStyle="bold"/>
 
-            <Button
-                android:id="@+id/btnDeleteAnimal"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_weight="1"
-                android:layout_marginStart="8dp"
-                android:text="🗑 Delete"
-                android:textAllCaps="false"
-                android:textStyle="bold"/>
+        <!-- HEALTH RECORDS LIST -->
 
-        </LinearLayout>
-
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerMedicalRecords"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:clipToPadding="false"
+            android:paddingBottom="20dp" />
 
     </LinearLayout>
 
