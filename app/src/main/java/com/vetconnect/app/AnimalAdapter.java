@@ -40,13 +40,22 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
         Animal animal = animalList.get(position);
 
         holder.tvAnimalName.setText(animal.getAnimalName());
-        holder.tvAnimalType.setText("Type : " + animal.getAnimalType());
-        holder.tvBreed.setText("Breed : " + animal.getBreed());
-        holder.tvAge.setText("Age : " + animal.getAge());
-        holder.tvGender.setText("Gender : " + animal.getGender());
+
+        holder.tvAnimalType.setText(
+                animal.getAnimalType()
+                        + " • "
+                        + animal.getAge()
+                        + " Years • "
+                        + animal.getGender()
+        );
+
+        holder.tvBreed.setText(
+                "Breed: " + animal.getBreed()
+        );
 
         holder.itemView.setOnClickListener(v ->
-                listener.onAnimalClick(animal));
+                listener.onAnimalClick(animal)
+        );
     }
 
     @Override
@@ -56,7 +65,11 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
 
     public static class AnimalViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvAnimalName, tvAnimalType, tvBreed, tvAge, tvGender;
+        TextView tvAnimalName;
+        TextView tvAnimalType;
+        TextView tvBreed;
+        TextView tvAge;
+        TextView tvGender;
 
         public AnimalViewHolder(@NonNull View itemView) {
             super(itemView);

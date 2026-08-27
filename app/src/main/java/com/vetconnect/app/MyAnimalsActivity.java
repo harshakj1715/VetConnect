@@ -32,31 +32,53 @@ public class MyAnimalsActivity extends AppCompatActivity {
 
         animalList = new ArrayList<>();
         db = FirebaseFirestore.getInstance();
-        adapter = new AnimalAdapter(animalList, new AnimalAdapter.OnAnimalClickListener() {
 
-            @Override
-            public void onAnimalClick(Animal animal) {
+        adapter = new AnimalAdapter(animalList,
+                new AnimalAdapter.OnAnimalClickListener() {
 
-                Intent intent = new Intent(MyAnimalsActivity.this,
-                        AnimalProfileActivity.class);
+                    @Override
+                    public void onAnimalClick(Animal animal) {
 
-                intent.putExtra("documentId", animal.getDocumentId());
-                intent.putExtra("animalName", animal.getAnimalName());
-                intent.putExtra("animalType", animal.getAnimalType());
-                intent.putExtra("breed", animal.getBreed());
-                intent.putExtra("age", animal.getAge());
-                intent.putExtra("gender", animal.getGender());
+                        Intent intent = new Intent(
+                                MyAnimalsActivity.this,
+                                AnimalProfileActivity.class
+                        );
 
-                startActivity(intent);
-            }
-        });
+                        intent.putExtra("documentId",
+                                animal.getDocumentId());
+
+                        intent.putExtra("animalName",
+                                animal.getAnimalName());
+
+                        intent.putExtra("animalType",
+                                animal.getAnimalType());
+
+                        intent.putExtra("breed",
+                                animal.getBreed());
+
+                        intent.putExtra("age",
+                                animal.getAge());
+
+                        intent.putExtra("gender",
+                                animal.getGender());
+
+                        startActivity(intent);
+                    }
+                });
 
         recyclerView.setAdapter(adapter);
 
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseUser user =
+                FirebaseAuth.getInstance().getCurrentUser();
 
         if (user == null) {
-            Toast.makeText(this, "Please login again", Toast.LENGTH_SHORT).show();
+
+            Toast.makeText(
+                    this,
+                    "Please login again",
+                    Toast.LENGTH_SHORT
+            ).show();
+
             finish();
             return;
         }
@@ -70,20 +92,26 @@ public class MyAnimalsActivity extends AppCompatActivity {
 
                     animalList.clear();
 
-                    for (QueryDocumentSnapshot document : queryDocumentSnapshots) {
+                    for (QueryDocumentSnapshot document :
+                            queryDocumentSnapshots) {
 
-                        Animal animal = document.toObject(Animal.class);
-                        animal.setDocumentId(document.getId());
+                        Animal animal =
+                                document.toObject(Animal.class);
+
+                        animal.setDocumentId(
+                                document.getId());
+
                         animalList.add(animal);
-
                     }
 
                     adapter.notifyDataSetChanged();
 
                 })
                 .addOnFailureListener(e ->
-                        Toast.makeText(MyAnimalsActivity.this,
+                        Toast.makeText(
+                                MyAnimalsActivity.this,
                                 e.getMessage(),
-                                Toast.LENGTH_LONG).show());
+                                Toast.LENGTH_LONG
+                        ).show());
     }
 }
