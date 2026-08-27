@@ -50,7 +50,7 @@ public class AnimalAdapter extends RecyclerView.Adapter<AnimalAdapter.AnimalView
         );
 
         holder.tvBreed.setText(
-                "Breed: " + animal.getBreed()
+                animal.getBreed()
         );
 
         holder.itemView.setOnClickListener(v ->

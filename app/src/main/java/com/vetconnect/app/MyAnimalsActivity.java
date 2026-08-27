@@ -106,6 +106,7 @@ public class MyAnimalsActivity extends AppCompatActivity {
 
                     adapter.notifyDataSetChanged();
 
+
                 })
                 .addOnFailureListener(e ->
                         Toast.makeText(

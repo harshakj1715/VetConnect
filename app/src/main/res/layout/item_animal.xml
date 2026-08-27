@@ -9,7 +9,7 @@
     android:layout_marginEnd="4dp"
     android:layout_marginTop="8dp"
     android:layout_marginBottom="8dp"
-    app:cardBackgroundColor="#F1EAF8"
+    app:cardBackgroundColor="#EFEAF8"
     app:cardCornerRadius="22dp"
     app:cardElevation="3dp"
     app:strokeWidth="0dp">
@@ -21,6 +21,7 @@
         android:padding="14dp"
         android:gravity="center_vertical">
 
+        <!-- Animal Photo -->
         <ImageView
             android:id="@+id/ivAnimalPhoto"
             android:layout_width="82dp"
@@ -31,6 +32,7 @@
             android:padding="16dp"
             android:contentDescription="Animal Photo" />
 
+        <!-- Animal Details -->
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -56,14 +58,30 @@
                 android:textColor="#555555"
                 android:textSize="14sp" />
 
-            <TextView
-                android:id="@+id/tvBreed"
+            <!-- Breed -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
-                android:text="Breed: German Shepherd"
-                android:textColor="#666666"
-                android:textSize="14sp" />
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Breed: "
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvBreed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="German Shepherd"
+                    android:textColor="#666666"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/tvAge"
@@ -79,14 +97,33 @@
 
         </LinearLayout>
 
-        <TextView
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:gravity="center"
-            android:text="›"
-            android:textColor="#2E7D32"
-            android:textSize="32sp"
-            android:textStyle="bold" />
+        <!-- Right Side: Animal Vector + Arrow -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+
+            <!-- Animal Type Vector -->
+            <ImageView
+                android:id="@+id/ivAnimalTypeIcon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@drawable/ic_animal_type"
+                android:tint="#2E7D32"
+                android:contentDescription="Animal Type" />
+
+            <!-- Arrow -->
+            <TextView
+                android:layout_width="30dp"
+                android:layout_height="40dp"
+                android:gravity="center"
+                android:text="›"
+                android:textColor="#2E7D32"
+                android:textSize="32sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
 
     </LinearLayout>
 
