@@ -9,6 +9,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.google.android.material.imageview.ShapeableImageView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 
@@ -16,14 +18,23 @@ import java.util.ArrayList;
 
 public class AnimalProfileActivity extends AppCompatActivity {
 
+    // Animal details
     TextView txtAnimalName;
     TextView txtAnimalType;
     TextView txtBreed;
     TextView txtAge;
     TextView txtGender;
-    TextView tvNoRecords;
 
+    // Header
+    View btnBack;
+    TextView tvHeaderSubtitle;
+
+    // Animal photo
+    ShapeableImageView ivAnimalPhoto;
+
+    // Medical records
     RecyclerView recyclerMedicalRecords;
+    TextView tvNoRecords;
 
     ArrayList<MedicalRecordModel> recordList;
 
@@ -33,25 +44,34 @@ public class AnimalProfileActivity extends AppCompatActivity {
 
     String animalId;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_animal_profile);
 
-        // -----------------------------
-        // Animal Profile Views
-        // -----------------------------
+
+        // =====================================================
+        // FIND VIEWS
+        // =====================================================
 
         txtAnimalName = findViewById(R.id.txtAnimalName);
+
         txtAnimalType = findViewById(R.id.txtAnimalType);
+
         txtBreed = findViewById(R.id.txtBreed);
+
         txtAge = findViewById(R.id.txtAge);
+
         txtGender = findViewById(R.id.txtGender);
 
-        // -----------------------------
-        // Medical Records Views
-        // -----------------------------
+        ivAnimalPhoto = findViewById(R.id.ivAnimalPhoto);
+
+        btnBack = findViewById(R.id.btnBack);
+
+        tvHeaderSubtitle = findViewById(R.id.tvHeaderSubtitle);
 
         recyclerMedicalRecords =
                 findViewById(R.id.recyclerMedicalRecords);
@@ -59,22 +79,32 @@ public class AnimalProfileActivity extends AppCompatActivity {
         tvNoRecords =
                 findViewById(R.id.tvNoRecords);
 
-        // -----------------------------
-        // Firebase
-        // -----------------------------
+
+        // =====================================================
+        // BACK BUTTON
+        // =====================================================
+
+        btnBack.setOnClickListener(v -> finish());
+
+
+        // =====================================================
+        // FIREBASE
+        // =====================================================
 
         db = FirebaseFirestore.getInstance();
 
-        // -----------------------------
-        // Get Animal ID
-        // -----------------------------
+
+        // =====================================================
+        // GET ANIMAL ID
+        // =====================================================
 
         animalId =
                 getIntent().getStringExtra("documentId");
 
-        // -----------------------------
-        // Get Animal Details
-        // -----------------------------
+
+        // =====================================================
+        // GET ANIMAL DETAILS
+        // =====================================================
 
         String animalName =
                 getIntent().getStringExtra("animalName");
@@ -91,100 +121,186 @@ public class AnimalProfileActivity extends AppCompatActivity {
         String gender =
                 getIntent().getStringExtra("gender");
 
-        // -----------------------------
-        // Display Animal Details
-        // -----------------------------
+        String photoUrl =
+                getIntent().getStringExtra("photoUrl");
+
+
+        // =====================================================
+        // DEFAULT VALUES
+        // =====================================================
+
+        if (animalName == null ||
+                animalName.trim().isEmpty()) {
+
+            animalName = "Unknown Animal";
+        }
+
+
+        if (animalType == null ||
+                animalType.trim().isEmpty()) {
+
+            animalType = "Animal";
+        }
+
+
+        if (breed == null ||
+                breed.trim().isEmpty()) {
+
+            breed = "Not Available";
+        }
+
+
+        if (age == null ||
+                age.trim().isEmpty()) {
+
+            age = "Not Available";
+        }
+
+
+        if (gender == null ||
+                gender.trim().isEmpty()) {
+
+            gender = "Not Available";
+        }
+
+
+        // =====================================================
+        // DISPLAY ANIMAL DETAILS
+        // =====================================================
 
         txtAnimalName.setText(animalName);
 
-        txtAnimalType.setText(
-                "Type : " + animalType
+        txtAnimalType.setText(animalType);
+
+        txtBreed.setText(breed);
+
+        txtAge.setText(age);
+
+        txtGender.setText(gender);
+
+
+        // =====================================================
+        // HEADER
+        // =====================================================
+
+        tvHeaderSubtitle.setText(
+                "All medical records of " + animalName
         );
 
-        txtBreed.setText(
-                "Breed : " + breed
-        );
 
-        txtAge.setText(
-                "Age : " + age
-        );
+        // =====================================================
+        // LOAD ANIMAL PHOTO
+        // =====================================================
 
-        txtGender.setText(
-                "Gender : " + gender
-        );
+        if (photoUrl != null &&
+                !photoUrl.trim().isEmpty()) {
 
-        // -----------------------------
-        // RecyclerView
-        // -----------------------------
+            Glide.with(this)
+                    .load(photoUrl)
+                    .placeholder(
+                            R.drawable.ic_animal_placeholder
+                    )
+                    .error(
+                            R.drawable.ic_animal_placeholder
+                    )
+                    .centerCrop()
+                    .into(ivAnimalPhoto);
+
+        } else {
+
+            ivAnimalPhoto.setImageResource(
+                    R.drawable.ic_animal_placeholder
+            );
+        }
+
+
+        // =====================================================
+        // RECYCLER VIEW
+        // =====================================================
 
         recyclerMedicalRecords.setLayoutManager(
                 new LinearLayoutManager(this)
         );
 
+        recyclerMedicalRecords.setNestedScrollingEnabled(
+                false
+        );
+
+
+        // =====================================================
+        // MEDICAL RECORD LIST
+        // =====================================================
+
         recordList = new ArrayList<>();
 
-        // -----------------------------
-        // Medical Record Adapter
-        // -----------------------------
 
-        adapter = new MedicalRecordAdapter(
-                recordList,
+        // =====================================================
+        // ADAPTER
+        // =====================================================
 
-                new MedicalRecordAdapter.OnMedicalRecordClickListener() {
+        adapter =
+                new MedicalRecordAdapter(
+                        recordList,
 
-                    @Override
-                    public void onDeleteClick(
-                            MedicalRecordModel record) {
+                        new MedicalRecordAdapter
+                                .OnMedicalRecordClickListener() {
 
-                        // Farmer cannot delete records.
-                        // Do nothing.
-                    }
+                            @Override
+                            public void onDeleteClick(
+                                    MedicalRecordModel record) {
 
-                    @Override
-                    public void onEditClick(
-                            MedicalRecordModel record) {
+                                // Farmer cannot delete records.
+                            }
 
-                        // Farmer cannot edit records.
-                        // Do nothing.
-                    }
-                }
-        );
+
+                            @Override
+                            public void onEditClick(
+                                    MedicalRecordModel record) {
+
+                                // Farmer cannot edit records.
+                            }
+                        }
+                );
+
 
         recyclerMedicalRecords.setAdapter(adapter);
 
-        // -----------------------------
-        // Load Medical Records
-        // -----------------------------
+
+        // =====================================================
+        // LOAD MEDICAL RECORDS
+        // =====================================================
 
         loadMedicalRecords();
     }
 
-    // -----------------------------
-    // Load Health Records
-    // -----------------------------
+
+    // =========================================================
+    // LOAD MEDICAL RECORDS FROM FIRESTORE
+    // =========================================================
 
     private void loadMedicalRecords() {
 
         if (animalId == null ||
-                animalId.isEmpty()) {
+                animalId.trim().isEmpty()) {
 
-            Toast.makeText(
-                    this,
-                    "Animal ID not found",
-                    Toast.LENGTH_SHORT
-            ).show();
+            tvNoRecords.setVisibility(View.VISIBLE);
+
+            recyclerMedicalRecords.setVisibility(View.GONE);
 
             return;
         }
+
 
         db.collection("animals")
                 .document(animalId)
                 .collection("medical_records")
                 .get()
+
                 .addOnSuccessListener(
                         queryDocumentSnapshots -> {
 
                             recordList.clear();
+
 
                             for (QueryDocumentSnapshot document :
                                     queryDocumentSnapshots) {
@@ -201,11 +317,9 @@ public class AnimalProfileActivity extends AppCompatActivity {
                                 recordList.add(record);
                             }
 
+
                             adapter.notifyDataSetChanged();
 
-                            // -----------------------------
-                            // Show / Hide No Records
-                            // -----------------------------
 
                             if (recordList.isEmpty()) {
 
@@ -213,10 +327,9 @@ public class AnimalProfileActivity extends AppCompatActivity {
                                         View.VISIBLE
                                 );
 
-                                recyclerMedicalRecords
-                                        .setVisibility(
-                                                View.GONE
-                                        );
+                                recyclerMedicalRecords.setVisibility(
+                                        View.GONE
+                                );
 
                             } else {
 
@@ -224,14 +337,22 @@ public class AnimalProfileActivity extends AppCompatActivity {
                                         View.GONE
                                 );
 
-                                recyclerMedicalRecords
-                                        .setVisibility(
-                                                View.VISIBLE
-                                        );
+                                recyclerMedicalRecords.setVisibility(
+                                        View.VISIBLE
+                                );
                             }
                         }
                 )
+
                 .addOnFailureListener(e -> {
+
+                    tvNoRecords.setVisibility(
+                            View.VISIBLE
+                    );
+
+                    recyclerMedicalRecords.setVisibility(
+                            View.GONE
+                    );
 
                     Toast.makeText(
                             AnimalProfileActivity.this,
@@ -241,13 +362,19 @@ public class AnimalProfileActivity extends AppCompatActivity {
                 });
     }
 
+
+    // =========================================================
+    // RELOAD WHEN RETURNING TO SCREEN
+    // =========================================================
+
     @Override
     protected void onResume() {
+
         super.onResume();
 
-        // Reload records when returning
-        // to this screen.
-        if (animalId != null) {
+        if (animalId != null &&
+                !animalId.trim().isEmpty()) {
+
             loadMedicalRecords();
         }
     }

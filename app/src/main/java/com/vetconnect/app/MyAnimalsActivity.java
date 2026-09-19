@@ -18,22 +18,37 @@ import java.util.ArrayList;
 public class MyAnimalsActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
+
     ArrayList<Animal> animalList;
+
     AnimalAdapter adapter;
+
     FirebaseFirestore db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_my_animals);
 
+
         recyclerView = findViewById(R.id.recyclerAnimals);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        recyclerView.setLayoutManager(
+                new LinearLayoutManager(this)
+        );
+
 
         animalList = new ArrayList<>();
+
         db = FirebaseFirestore.getInstance();
 
-        adapter = new AnimalAdapter(animalList,
+
+        adapter = new AnimalAdapter(
+                animalList,
+
                 new AnimalAdapter.OnAnimalClickListener() {
 
                     @Override
@@ -44,32 +59,63 @@ public class MyAnimalsActivity extends AppCompatActivity {
                                 AnimalProfileActivity.class
                         );
 
-                        intent.putExtra("documentId",
-                                animal.getDocumentId());
 
-                        intent.putExtra("animalName",
-                                animal.getAnimalName());
+                        intent.putExtra(
+                                "documentId",
+                                animal.getDocumentId()
+                        );
 
-                        intent.putExtra("animalType",
-                                animal.getAnimalType());
 
-                        intent.putExtra("breed",
-                                animal.getBreed());
+                        intent.putExtra(
+                                "animalName",
+                                animal.getAnimalName()
+                        );
 
-                        intent.putExtra("age",
-                                animal.getAge());
 
-                        intent.putExtra("gender",
-                                animal.getGender());
+                        intent.putExtra(
+                                "animalType",
+                                animal.getAnimalType()
+                        );
+
+
+                        intent.putExtra(
+                                "breed",
+                                animal.getBreed()
+                        );
+
+
+                        intent.putExtra(
+                                "age",
+                                animal.getAge()
+                        );
+
+
+                        intent.putExtra(
+                                "gender",
+                                animal.getGender()
+                        );
+
+
+                        // IMPORTANT:
+                        // Pass animal photo URL
+                        intent.putExtra(
+                                "photoUrl",
+                                animal.getPhotoUrl()
+                        );
+
 
                         startActivity(intent);
                     }
-                });
+                }
+        );
+
 
         recyclerView.setAdapter(adapter);
 
+
         FirebaseUser user =
                 FirebaseAuth.getInstance().getCurrentUser();
+
 
         if (user == null) {
 
@@ -80,39 +126,52 @@ public class MyAnimalsActivity extends AppCompatActivity {
             ).show();
 
             finish();
+
             return;
         }
 
+
         String email = user.getEmail();
+
 
         db.collection("animals")
                 .whereEqualTo("farmerEmail", email)
                 .get()
-                .addOnSuccessListener(queryDocumentSnapshots -> {
+                .addOnSuccessListener(
+                        queryDocumentSnapshots -> {
 
-                    animalList.clear();
-
-                    for (QueryDocumentSnapshot document :
-                            queryDocumentSnapshots) {
-
-                        Animal animal =
-                                document.toObject(Animal.class);
-
-                        animal.setDocumentId(
-                                document.getId());
-
-                        animalList.add(animal);
-                    }
-
-                    adapter.notifyDataSetChanged();
+                            animalList.clear();
 
 
-                })
+                            for (QueryDocumentSnapshot document :
+                                    queryDocumentSnapshots) {
+
+                                Animal animal =
+                                        document.toObject(
+                                                Animal.class
+                                        );
+
+
+                                animal.setDocumentId(
+                                        document.getId()
+                                );
+
+
+                                animalList.add(animal);
+                            }
+
+
+                            adapter.notifyDataSetChanged();
+
+                        }
+                )
                 .addOnFailureListener(e ->
+
                         Toast.makeText(
                                 MyAnimalsActivity.this,
                                 e.getMessage(),
                                 Toast.LENGTH_LONG
-                        ).show());
+                        ).show()
+                );
     }
 }

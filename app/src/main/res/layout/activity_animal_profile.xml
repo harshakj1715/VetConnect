@@ -1,141 +1,412 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#FFFFFF">
 
-    <LinearLayout
+    <!-- ================= HEADER ================= -->
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/headerCard"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:layout_height="125dp"
+        android:layout_marginTop="0dp"
+        app:cardBackgroundColor="#FFFFFF"
+        app:cardCornerRadius="18dp"
+        app:cardElevation="1dp"
+        app:strokeColor="#DDE4DF"
+        app:strokeWidth="1dp">
 
-        <!-- PAGE TITLE -->
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="🐾 Animal Profile"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:textColor="#2E7D32"
-            android:layout_gravity="center"
-            android:layout_marginBottom="20dp" />
+            <!-- Header background -->
+            <ImageView
+                android:id="@+id/headerBackground"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/health_records_header" />
 
-        <!-- ANIMAL PROFILE CARD -->
+            <!-- Dark/white transparent layer if required -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#30FFFFFF" />
 
-        <com.google.android.material.card.MaterialCardView
+            <!-- BACK BUTTON -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="25dp"
+                app:cardBackgroundColor="#F5FFF7"
+                app:cardCornerRadius="13dp"
+                app:cardElevation="2dp"
+                app:strokeColor="#DCE9DF"
+                app:strokeWidth="1dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btnBack"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="10dp"
+                    android:contentDescription="Back"
+                    app:srcCompat="@drawable/ic_arrow_back_green" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- STETHOSCOPE / MEDICAL BUTTON -->
+
+>
+
+
+            <!-- TITLE -->
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="116dp"
+                android:layout_marginTop="40dp"
+                android:text="Health Records"
+                android:textColor="#17633F"
+                android:textSize="21sp"
+                android:textStyle="bold" />
+
+            <!-- SUBTITLE -->
+
+            <TextView
+                android:id="@+id/tvHeaderSubtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="117dp"
+                android:layout_marginTop="65dp"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:text="All medical records of Rocky"
+                android:textColor="#666666"
+                android:textSize="12sp" />
+
+        </FrameLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="130dp"
+        android:fillViewport="true"
+        android:clipToPadding="false"
+        android:paddingBottom="30dp"
+        android:scrollbars="none">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="18dp"
-            app:cardElevation="5dp"
-            app:cardBackgroundColor="#FFFFFF">
+            android:orientation="vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp">
+
+
+            <!-- ================= ANIMAL PROFILE CARD ================= -->
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="148dp"
+                app:cardBackgroundColor="#FFFFFF"
+                app:cardCornerRadius="19dp"
+                app:cardElevation="1dp"
+                app:strokeColor="#E2E2E2"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:padding="12dp">
+
+
+                    <!-- ANIMAL PHOTO -->
+
+                    <com.google.android.material.imageview.ShapeableImageView
+                        android:id="@+id/ivAnimalPhoto"
+                        android:layout_width="102dp"
+                        android:layout_height="102dp"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_animal_placeholder"
+                        app:shapeAppearanceOverlay="@style/CircleImageShape"
+                        app:strokeColor="#D9E7DE"
+                        app:strokeWidth="2dp" />
+
+
+                    <!-- ANIMAL DETAILS -->
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginStart="12dp"
+                        android:orientation="vertical">
+
+
+                        <!-- NAME + TYPE -->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/txtAnimalName"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:text="Rocky"
+                                android:textColor="#17633F"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                            <TextView
+                                android:id="@+id/txtAnimalType"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="#F0E6FF"
+                                android:paddingStart="9dp"
+                                android:paddingEnd="9dp"
+                                android:paddingTop="5dp"
+                                android:paddingBottom="5dp"
+                                android:text="Dog"
+                                android:textColor="#643A9B"
+                                android:textSize="12sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+                        <!-- BREED -->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="28dp"
+                            android:layout_marginTop="7dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="match_parent"
+                                android:background="#F5F8F5"
+                                android:gravity="center"
+                                android:text="🐾"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:layout_width="52dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="Breed"
+                                android:textColor="#666666"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/txtBreed"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:maxLines="1"
+                                android:ellipsize="end"
+                                android:text="German shepherd"
+                                android:textColor="#303030"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+                        <!-- AGE -->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="28dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="match_parent"
+                                android:background="#F5F8F5"
+                                android:gravity="center"
+                                android:text="◷"
+                                android:textColor="#555555"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="52dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="Age"
+                                android:textColor="#666666"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/txtAge"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="3"
+                                android:textColor="#303030"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+
+                        <!-- GENDER -->
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="28dp"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:layout_width="30dp"
+                                android:layout_height="match_parent"
+                                android:background="#F5F8F5"
+                                android:gravity="center"
+                                android:text="♂"
+                                android:textColor="#555555"
+                                android:textSize="16sp" />
+
+                            <TextView
+                                android:layout_width="52dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="6dp"
+                                android:text="Gender"
+                                android:textColor="#666666"
+                                android:textSize="13sp" />
+
+                            <TextView
+                                android:id="@+id/txtGender"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Male"
+                                android:textColor="#303030"
+                                android:textSize="13sp"
+                                android:textStyle="bold" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <!-- ================= MEDICAL HISTORY HEADER ================= -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="20dp">
+                android:layout_marginTop="16dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
 
-                <!-- Animal Name -->
 
-                <TextView
-                    android:id="@+id/txtAnimalName"
-                    android:layout_width="wrap_content"
+                <!-- MEDICAL PLUS ICON -->
+
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="38dp"
+                    android:layout_height="38dp"
+                    app:cardBackgroundColor="#F3E9FF"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="#D9CBEA"
+                    app:strokeWidth="1dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="+"
+                        android:textColor="#6332A2"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <LinearLayout
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="Rocky"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    android:textColor="#2E7D32" />
+                    android:layout_weight="1"
+                    android:layout_marginStart="10dp"
+                    android:orientation="vertical">
 
-                <!-- Type -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Medical History"
+                        android:textColor="#17633F"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtAnimalType"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Type : Dog"
-                    android:textSize="17sp"
-                    android:textColor="#444444"
-                    android:layout_marginTop="12dp" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="2dp"
+                        android:text="Previous treatments and health records"
+                        android:textColor="#777777"
+                        android:textSize="12sp" />
 
-                <!-- Breed -->
-
-                <TextView
-                    android:id="@+id/txtBreed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Breed : German Shepherd"
-                    android:textSize="17sp"
-                    android:textColor="#444444"
-                    android:layout_marginTop="7dp" />
-
-                <!-- Age -->
-
-                <TextView
-                    android:id="@+id/txtAge"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Age : 3 Years"
-                    android:textSize="17sp"
-                    android:textColor="#444444"
-                    android:layout_marginTop="7dp" />
-
-                <!-- Gender -->
-
-                <TextView
-                    android:id="@+id/txtGender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Gender : Male"
-                    android:textSize="17sp"
-                    android:textColor="#444444"
-                    android:layout_marginTop="7dp" />
+                </LinearLayout>
 
             </LinearLayout>
 
-        </com.google.android.material.card.MaterialCardView>
+
+            <!-- ================= NO RECORDS ================= -->
+
+            <TextView
+                android:id="@+id/tvNoRecords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
+                android:text="No medical records available"
+                android:textColor="#777777"
+                android:textSize="14sp"
+                android:visibility="gone" />
 
 
-        <!-- HEALTH RECORDS TITLE -->
+            <!-- ================= MEDICAL RECORD TIMELINE ================= -->
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="📖 Health Records"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="#2E7D32"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="10dp" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerMedicalRecords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:nestedScrollingEnabled="false"
+                android:overScrollMode="never"
+                android:clipToPadding="false"
+                android:paddingBottom="20dp" />
 
+        </LinearLayout>
 
-        <!-- NO RECORDS MESSAGE -->
+    </ScrollView>
 
-        <TextView
-            android:id="@+id/tvNoRecords"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="No health records available"
-            android:textSize="16sp"
-            android:textColor="#777777"
-            android:gravity="center"
-            android:padding="25dp"
-            android:visibility="gone" />
-
-
-        <!-- HEALTH RECORDS LIST -->
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerMedicalRecords"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            android:clipToPadding="false"
-            android:paddingBottom="20dp" />
-
-    </LinearLayout>
-
-</ScrollView>
+</FrameLayout>

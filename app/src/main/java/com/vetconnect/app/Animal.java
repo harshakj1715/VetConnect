@@ -9,14 +9,19 @@ public class Animal {
     private String gender;
     private String farmerEmail;
     private String documentId;
-
+    private String photoUrl;
 
     public Animal() {
         // Required empty constructor for Firestore
     }
 
-    public Animal(String animalName, String animalType, String breed,
-                  String age, String gender, String farmerEmail) {
+    public Animal(String animalName,
+                  String animalType,
+                  String breed,
+                  String age,
+                  String gender,
+                  String farmerEmail) {
+
         this.animalName = animalName;
         this.animalType = animalType;
         this.breed = breed;
@@ -48,12 +53,20 @@ public class Animal {
     public String getFarmerEmail() {
         return farmerEmail;
     }
+
     public String getDocumentId() {
         return documentId;
     }
 
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
 
     public void setDocumentId(String documentId) {
         this.documentId = documentId;
+    }
+
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
     }
 }
