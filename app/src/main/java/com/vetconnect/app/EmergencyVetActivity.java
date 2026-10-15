@@ -66,7 +66,18 @@ public class EmergencyVetActivity extends AppCompatActivity {
             }
 
         });
+        Button btnRetryLocation = findViewById(R.id.btnRetryLocation);
 
+        btnRetryLocation.setOnClickListener(v -> {
+            if (ContextCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION)
+                    == PackageManager.PERMISSION_GRANTED) {
+                getCurrentLocation();
+            } else {
+                requestPermissionLauncher.launch(
+                        Manifest.permission.ACCESS_FINE_LOCATION);
+            }
+        });
         // Nearby Veterinary Hospitals
         btnNearbyVets.setOnClickListener(v -> {
 

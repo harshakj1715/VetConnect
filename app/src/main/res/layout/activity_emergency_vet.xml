@@ -1,59 +1,352 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#F8FBF5"
+    android:fillViewport="true"
+    android:clipToPadding="false">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="60dp"
+        android:paddingBottom="1dp">
 
-        <TextView
-            android:layout_width="wrap_content"
+        <!-- HEADER -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🚨 Emergency Vet"
-            android:textStyle="bold"
-            android:textSize="28sp"
-            android:layout_gravity="center"
-            android:layout_marginBottom="25dp"/>
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="14dp">
 
+            <TextView
+                android:layout_width="46dp"
+                android:layout_height="46dp"
+                android:gravity="center"
+                android:text="🚨"
+                android:textSize="27sp"
+                android:background="#E3F2E1" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="10dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Emergency Vet"
+                    android:textColor="#17643E"
+                    android:textSize="23sp"
+                    android:maxLines="1"
+                    android:includeFontPadding="false"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Quick help for your animal"
+                    android:textColor="#718A78"
+                    android:textSize="12sp"
+                    android:maxLines="1" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VetConnect"
+                android:textColor="#17643E"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <!-- EMERGENCY BANNER -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="#E5F4E3"
+            android:padding="30dp"
+            android:layout_marginBottom="14dp">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Animal Emergency?"
+                    android:textColor="#17643E"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:includeFontPadding="false" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    android:text="Find nearby veterinary hospitals and get help quickly."
+                    android:textColor="#607D68"
+                    android:textSize="13sp"
+                    android:lineSpacingExtra="2dp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="62dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="🐄&#10;👩‍⚕️"
+                android:textSize="26sp" />
+
+        </LinearLayout>
+
+        <!-- GET CURRENT LOCATION -->
         <Button
             android:id="@+id/btnCurrentLocation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="📍 Get Current Location"/>
+            android:layout_height="60dp"
+            android:layout_marginBottom="14dp"
+            android:text="📍  Get Current Location"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#237746"
+            android:minHeight="0dp"
+            android:padding="8dp"
+            android:stateListAnimator="@null" />
 
-        <Button
-            android:id="@+id/btnNearbyVets"
+        <!-- LOCATION STATUS CARD -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="🏥 Find Nearby Veterinary Hospitals"
-            android:layout_marginTop="15dp"/>
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:padding="14dp"
+            android:layout_marginBottom="14dp"
+            android:elevation="2dp">
 
-        <Button
-            android:id="@+id/btnEmergencyCall"
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="📍  Your Location"
+                android:textColor="#17643E"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="Location not detected yet"
+                android:textColor="#718A78"
+                android:textSize="13sp"
+                android:paddingTop="2dp"
+                android:paddingBottom="2dp" />
+
+            <Button
+                android:id="@+id/btnRetryLocation"
+                android:layout_width="wrap_content"
+                android:layout_height="38dp"
+                android:layout_marginTop="7dp"
+                android:text="↻  Retry"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:textColor="#17643E"
+                android:backgroundTint="#E3F2E1"
+                android:minHeight="0dp"
+                android:paddingStart="18dp"
+                android:paddingEnd="18dp"
+                android:paddingTop="4dp"
+                android:paddingBottom="4dp"
+                android:stateListAnimator="@null" />
+
+        </LinearLayout>
+
+        <!-- QUICK ACTION CARDS -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="📞 Emergency Call"
-            android:layout_marginTop="15dp"/>
+            android:orientation="horizontal"
+            android:layout_marginBottom="14dp">
 
+            <!-- NEARBY VETERINARY HOSPITALS -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="156dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:layout_marginEnd="6dp"
+                android:background="#FFFFFF"
+                android:elevation="2dp">
+
+                <TextView
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:gravity="center"
+                    android:text="🏥"
+                    android:textSize="25sp"
+                    android:background="#E3F2E1" />
+
+                <Button
+                    android:id="@+id/btnNearbyVets"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:padding="0dp"
+                    android:gravity="start|center_vertical"
+                    android:minHeight="44dp"
+                    android:minWidth="0dp"
+                    android:text="Nearby Veterinary Hospitals"
+                    android:textAllCaps="false"
+                    android:textColor="#17643E"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#FFFFFF"
+                    android:stateListAnimator="@null" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Find hospitals near you"
+                    android:textColor="#718A78"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+            <!-- EMERGENCY CALL -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="156dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:padding="10dp"
+                android:layout_marginStart="6dp"
+                android:background="#FFFFFF"
+                android:elevation="2dp">
+
+                <TextView
+                    android:layout_width="46dp"
+                    android:layout_height="46dp"
+                    android:gravity="center"
+                    android:text="📞"
+                    android:textSize="25sp"
+                    android:background="#E3F2E1" />
+
+                <Button
+                    android:id="@+id/btnEmergencyCall"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:padding="0dp"
+                    android:gravity="start|center_vertical"
+                    android:minHeight="44dp"
+                    android:minWidth="0dp"
+                    android:text="Emergency Call"
+                    android:textAllCaps="false"
+                    android:textColor="#17643E"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:backgroundTint="#FFFFFF"
+                    android:stateListAnimator="@null" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Call for urgent help"
+                    android:textColor="#718A78"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <!-- SHARE LOCATION -->
         <Button
             android:id="@+id/btnShareLocation"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="📤 Share My Location"
-            android:layout_marginTop="15dp"/>
+            android:layout_height="60dp"
+            android:layout_marginBottom="14dp"
+            android:text="📍  Share My Location"
+            android:textAllCaps="false"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#17643E"
+            android:backgroundTint="#DFF0DC"
+            android:minHeight="0dp"
+            android:padding="8dp"
+            android:stateListAnimator="@null" />
 
-        <TextView
-            android:id="@+id/tvLocation"
+
+        <!-- FOOTER IMAGE -->
+
+
+        <!-- FOOTER -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Current Location: Not Available"
-            android:textSize="18sp"
-            android:padding="20dp"/>
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:padding="13dp"
+            android:background="#E5F4E3">
+
+            <TextView
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:gravity="center"
+                android:text="🐾"
+                android:textSize="25sp" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:paddingStart="50dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Together for healthier animals"
+                    android:textColor="#17643E"
+                    android:textSize="14sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:text="Emergency care. Anytime. Anywhere."
+                    android:textColor="#607D68"
+                    android:textSize="11sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
 
     </LinearLayout>
 
 </ScrollView>
+
+
+
+
+
