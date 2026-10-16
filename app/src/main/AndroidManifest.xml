@@ -112,6 +112,29 @@
                 android:resource="@xml/file_paths"/>
 
         </provider>
+        <activity
+            android:name=".DoctorRegisterActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".DoctorDashboardActivity"
+            android:exported="false" />
+
+        <activity
+            android:name=".DoctorLoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".EmergencyRequestsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ManageCasesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".TreatmentRecordsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".DoctorProfileActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
